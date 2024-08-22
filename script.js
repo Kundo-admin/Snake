@@ -1,4 +1,4 @@
- const gameBoard = document.getElementById('gameBoard');
+const gameBoard = document.getElementById('gameBoard');
 const scoreElement = document.getElementById('score');
 
 const boardSize = 400;
