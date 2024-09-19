@@ -2,6 +2,7 @@
 const eatSound = document.getElementById('eatSound');
 const gameOverSound = document.getElementById('gameOverSound');
 
+// Obtén el elemento de juego y puntuación
 const gameBoard = document.getElementById('gameBoard');
 const scoreElement = document.getElementById('score');
 
@@ -16,14 +17,19 @@ let score = 0;
 let gameOver = false;
 let gamePaused = false;
 
+// Función para crear la comida
 function createFood() {
     const foodElement = document.createElement('div');
     foodElement.style.left = `${food.x * tileSize}px`;
     foodElement.style.top = `${food.y * tileSize}px`;
     foodElement.classList.add('food');
     gameBoard.appendChild(foodElement);
+
+    // Reproduce un sonido para la comida
+    speak(`Food is at position ${food.x + 1}, ${food.y + 1}`);
 }
 
+// Función para dibujar la serpiente
 function drawSnake() {
     gameBoard.innerHTML = '';
     snake.forEach(segment => {
@@ -36,6 +42,7 @@ function drawSnake() {
     createFood();
 }
 
+// Función para actualizar la serpiente
 function updateSnake() {
     const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
 
@@ -60,11 +67,13 @@ function updateSnake() {
         eatSound.play();  // Reproduce el sonido cuando la serpiente come
         speak(`Score increased. Current score is ${score}`);
         food = { x: Math.floor(Math.random() * tilesPerRow), y: Math.floor(Math.random() * tilesPerRow) };
+        drawSnake();  // Redibuja la serpiente y la comida después de comer
     } else {
         snake.pop();
     }
 }
 
+// Función para reiniciar el juego
 function resetGame() {
     snake = [{ x: 5, y: 5 }];
     direction = { x: 1, y: 0 };
@@ -76,45 +85,5 @@ function resetGame() {
     drawSnake();
 }
 
-function gameLoop() {
-    if (!gameOver && !gamePaused) {
-        updateSnake();
-        drawSnake();
-    }
-}
-
-function changeDirection(event) {
-    switch (event.key) {
-        case 'w':
-        case 'W':
-            if (direction.y === 0) direction = { x: 0, y: -1 };
-            break;
-        case 's':
-        case 'S':
-            if (direction.y === 0) direction = { x: 0, y: 1 };
-            break;
-        case 'a':
-        case 'A':
-            if (direction.x === 0) direction = { x: -1, y: 0 };
-            break;
-        case 'd':
-        case 'D':
-            if (direction.x === 0) direction = { x: 1, y: 0 };
-            break;
-        case ' ':
-            gamePaused = !gamePaused;
-            break;
-        case 'r':
-        case 'R':
-            resetGame();
-            break;
-    }
-}
-
-function speak(text) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    speechSynthesis.speak(utterance);
-}
-
-document.addEventListener('keydown', changeDirection);
-setInterval(gameLoop, 100);
+// Función principal del juego
+function game
