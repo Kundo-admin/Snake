@@ -10,15 +10,11 @@
     <h1>Juego de la Serpiente</h1>
     <div id="gameBoard"></div>
     <p>Puntuación: <span id="score">0</span></p>
-    
-    <!-- Elementos de audio -->
-    <audio id="eatSound" src="https://freesound.org/s/570336/"></audio>
-    <audio id="gameOverSound" src="sounds/gameover.mp3"></audio>
-    
-    <!-- Botones para probar los sonidos -->
-    <button onclick="document.getElementById('eatSound').play()">Reproducir Sonido de Comer</button>
-    <button onclick="document.getElementById('gameOverSound').play()">Reproducir Sonido de Game Over</button>
-    
+    <!-- Añade elementos de audio -->
+    <audio id="eatSound" src="sounds/eatSound.mp3" preload="auto"></audio>
+    <audio id="gameOverSound" src="sounds/gameOver.mp3" preload="auto"></audio>
+    <audio id="proximitySound" src="sounds/proximity.mp3" preload="auto"></audio>
     <script src="script.js"></script>
 </body>
 </html>
+
