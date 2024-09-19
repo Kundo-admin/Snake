@@ -1,3 +1,7 @@
+// Obtén los elementos de audio del HTML
+const eatSound = document.getElementById('eatSound');
+const gameOverSound = document.getElementById('gameOverSound');
+
 const gameBoard = document.getElementById('gameBoard');
 const scoreElement = document.getElementById('score');
 
@@ -41,6 +45,8 @@ function updateSnake() {
     if (head.y >= tilesPerRow) head.y = 0;
 
     if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
+        gameOverSound.play();  // Reproduce el sonido de game over
+        speak(`Game Over. Your score is ${score}`);
         gameOver = true;
         alert('Game Over! Tu puntuación es: ' + score);
         return;
@@ -51,6 +57,8 @@ function updateSnake() {
     if (head.x === food.x && head.y === food.y) {
         score++;
         scoreElement.textContent = score;
+        eatSound.play();  // Reproduce el sonido cuando la serpiente come
+        speak(`Score increased. Current score is ${score}`);
         food = { x: Math.floor(Math.random() * tilesPerRow), y: Math.floor(Math.random() * tilesPerRow) };
     } else {
         snake.pop();
@@ -103,5 +111,11 @@ function changeDirection(event) {
     }
 }
 
+function speak(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    speechSynthesis.speak(utterance);
+}
+
 document.addEventListener('keydown', changeDirection);
 setInterval(gameLoop, 100);
+
