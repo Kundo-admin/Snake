@@ -4,6 +4,7 @@ body {
     background-color: #f0f0f0;
     margin: 0;
     padding: 0;
+    overflow: hidden; /* Evita barras de desplazamiento */
 }
 
 h1 {
@@ -11,11 +12,12 @@ h1 {
 }
 
 #gameBoard {
-    position: relative;
-    width: 500px;
-    height: 500px;
-    background-color: #333;
-    margin: 20px auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Ancho del 100% del viewport */
+    height: 46vw; /* Altura basada en la proporción 16:9 */
+    background-color: #242323;
     border: 1px solid #000;
 }
 
