@@ -118,4 +118,3 @@ function speak(text) {
 
 document.addEventListener('keydown', changeDirection);
 setInterval(gameLoop, 100);
-
